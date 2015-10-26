@@ -1,11 +1,3 @@
-# TranslationAssistant
-
-일본어 해석을 도와주는 프로그램입니다.
-
-.NET Framework 4.5 이상이 필요합니다. [.NET Framework 다운로드](https://msdn.microsoft.com/aa496123) Windows 7 이상의 운영체제에서 사용하는 것을 권장합니다.
-
-퍼블릭 도메인입니다. 상업적으로 사용해도 됩니다. 이 소프트웨어의 작성자는 이 프로그램으로 인해 발생하는 문제에 대하여 책임지지 않습니다. 구체적인 내용은 아래의 영어로 작성된 내용을 참조하면 됩니다.
-
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
