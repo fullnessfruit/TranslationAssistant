@@ -97,34 +97,44 @@ namespace TranslationAssistant
 			}
 
 			// richTextBox에 입력된 내용이 있을 때에만 지정한 라인으로 이동하는 메뉴와 라인을 사전에서 찾는 메뉴와 라인을 번역하는 메뉴를 활성화한다.
-			if (lineOffsetList == null)
+			if (lineOffsetList != null)
+			{
+				dictionaryLineToolStripMenuItem.Enabled = true;
+				translateLineToolStripMenuItem.Enabled = true;
+
+				// 마우스가 어느 라인 위에 있는지 확인한다.
+				int charIndex = richTextBox.GetCharIndexFromPosition(richTextBox.PointToClient(Cursor.Position));
+
+				clickedLineNumber = Array.BinarySearch(lineOffsetList, charIndex);
+				if (clickedLineNumber < 0)
+				{
+					clickedLineNumber = ~clickedLineNumber;
+				}
+				else
+				{
+					clickedLineNumber++;
+				}
+
+				// 클릭한 라인이 현재 라인이 아닌 경우에만 지정한 라인으로 이동하는 메뉴를 활성화한다.
+				if (clickedLineNumber != numericUpDownLineNumber.Value)
+				{
+					jumpToolStripMenuItem.Enabled = true;
+				}
+				else
+				{
+					jumpToolStripMenuItem.Enabled = false;
+				}
+
+				jumpToolStripMenuItem.Text = "이 줄(" + clickedLineNumber + ")로 이동";
+			}
+			else
 			{
 				jumpToolStripMenuItem.Enabled = false;
 				dictionaryLineToolStripMenuItem.Enabled = false;
 				translateLineToolStripMenuItem.Enabled = false;
 
 				jumpToolStripMenuItem.Text = "이 줄로 이동";
-				return;
-            }
-
-			// 컨텍스트 메뉴가 열릴 때 마우스의 위치가 어느 라인 위에 있는지 확인한다.
-			int charIndex = richTextBox.GetCharIndexFromPosition(richTextBox.PointToClient(Cursor.Position));
-
-			clickedLineNumber = Array.BinarySearch(lineOffsetList, charIndex);
-			if (clickedLineNumber < 0)
-			{
-				clickedLineNumber = ~clickedLineNumber;
 			}
-			else
-			{
-				clickedLineNumber++;
-			}
-
-			jumpToolStripMenuItem.Enabled = true;
-			dictionaryLineToolStripMenuItem.Enabled = true;
-			translateLineToolStripMenuItem.Enabled = true;
-
-			jumpToolStripMenuItem.Text = "이 줄(" + clickedLineNumber + ")로 이동";
 		}
 
 		private void jumpToolStripMenuItem_Click(object sender, EventArgs e)
