@@ -147,7 +147,7 @@ namespace TranslationAssistant
 			// 선택된 내용을 네이버 일본어 사전으로 검색
 			try
 			{
-				webBrowser.Navigate("https://ja.dict.naver.com/search.nhn?range=all&q=" + Uri.EscapeDataString(richTextBox.SelectedText) + "&sm=jpd_hty");
+				webBrowser.Navigate("https://ja.dict.naver.com/#/search?query=" + Uri.EscapeDataString(richTextBox.SelectedText));
 			}
 			catch
 			{
@@ -183,7 +183,7 @@ namespace TranslationAssistant
 			// 오른쪽 클릭한 라인을 네이버 일본어 사전으로 검색
 			try
 			{
-				webBrowser.Navigate("https://ja.dict.naver.com/search.nhn?range=all&q=" + Uri.EscapeDataString(richTextBox.Lines[clickedLineNumber - 1]) + "&sm=jpd_hty");
+				webBrowser.Navigate("https://ja.dict.naver.com/#/search?query=" + Uri.EscapeDataString(richTextBox.Lines[clickedLineNumber - 1]));
 			}
 			catch
 			{
@@ -494,6 +494,7 @@ namespace TranslationAssistant
 			WebBrowser webBrowser = (WebBrowser)sender;
 
 			// 네이버 일본어 사전 검색인 경우에는 번역 결과가 보이도록 무조건 페이지 맨 아래로 스크롤하고, 엔터만 누르면 다음 문장이 검색될 수 있도록 buttonNext에 포커스를 설정한다.
+			// 현재 주소가 바뀌어서 정상적으로 동작하지 않는다.
 			if (webBrowser.Url.ToString().StartsWith("https://ja.dict.naver.com/search.nhn?range=all&q=") && webBrowser.Url.ToString().EndsWith("&sm=jpd_hty"))
 			{
 				webBrowser.Document.Body.ScrollIntoView(false);
@@ -522,7 +523,7 @@ namespace TranslationAssistant
 
 			try
 			{
-				webBrowser.Navigate("https://ja.dict.naver.com/search.nhn?range=all&q=" + Uri.EscapeDataString(richTextBox.Lines[lineNumber - 1]) + "&sm=jpd_hty");
+				webBrowser.Navigate("https://ja.dict.naver.com/#/search?query=" + Uri.EscapeDataString(richTextBox.Lines[lineNumber - 1]));
 			}
 			catch
 			{
