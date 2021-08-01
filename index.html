@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+	<script src="EventHandler.js"></script>
+	<style>
+		html {
+			width: 100%;
+			height: 100%;
+		}
+
+		body {
+			width: 99%;
+			height: 98%;
+			display: flex;
+			flex-direction: row;
+		}
+		
+		#originalTextDivision {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		}
+		
+		#originalTextBodyDivision {
+			flex: 1;
+			display: flex;
+			flex-direction: row;
+		}
+		
+		#originalTextBodyTextAreaDivision {
+			flex: 1;
+		}
+		
+		#textAreaOriginalText {
+			width: 99%;
+			height: 100%;
+			font-family: "Yu Gothic";
+			font-size: 20px;
+			white-space: nowrap;
+		}
+		
+		#translationDivision {
+			width: 731px;
+			display: flex;
+			flex-direction: column;
+		}
+		
+		#addressDivision {
+			width: 100%;
+		}
+		
+		#textBoxAddress {
+			width: 100%;
+		}
+		
+		#translationBodyDivision {
+			flex: 1;
+		}
+		
+		#webViewTranslation {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body onload="OnBodyLoad()">
+	<div id="originalTextDivision">
+		<div>
+			<label for="numericUpDownLineNumber">줄 번호</label>
+			<input type="number" id="numericUpDownLineNumber" value="1" min="1" max="1" oninput="OnNumericUpDownLineNumberInput()">
+			<button type="button" id="buttonPrevious" onclick="OnButtonPreviousClick()">↑</button>
+			<button type="button" id="buttonNext" onclick="OnButtonNextClick()">↓</button>
+			<input type="checkbox" id="checkBoxClipboard" oninput="OnCheckBoxClipboardInput()">
+			<label for="checkBoxClipboard">클립보드 감시</label>
+		</div>
+		<div id="originalTextBodyDivision">
+			<div>
+				<canvas id="canvasLineNumber" width="0"></canvas>
+			</div>
+			<div id="originalTextBodyTextAreaDivision">
+				<textarea id="textAreaOriginalText" oninput="OnTextAreaOriginalTextInput()" onscroll="OnTextAreaOriginalTextScroll()"></textarea>
+			</div>
+		</div>
+	</div>
+	<div id="translationDivision">
+		<div>
+			<button type="button" id="buttonBack" onclick="OnButtonBackClick()">←</button>
+			<button type="button" id="buttonForward" onclick="OnButtonForwardClick()">→</button>
+			<button type="button" id="buttonRefresh" onclick="OnButtonRefreshClick()">새로 고침</button>
+			<button type="button" id="buttonStop" onclick="OnButtonStopClick()">중지</button>
+			<button type="button" id="buttonGoogleTranslate" onclick="OnButtonGoogleTranslateClick()">현재 페이지 구글 번역</button>
+			<button type="button" id="buttonPapagoTranslate" onclick="OnButtonPapagoTranslateClick()">현재 페이지 파파고 번역</button>
+		</div>
+		<div id="addressDivision">
+			<input id="textBoxAddress" value="about:blank">
+		</div>
+		<div id="translationBodyDivision">
+			<webview id="webViewTranslation" src="about:blank"></webview>
+		</div>
+	</div>
+</body>
+</html>
