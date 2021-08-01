@@ -2,8 +2,6 @@
 
 일본어 해석을 도와주는 프로그램입니다.
 
-.NET Framework 4.5 이상이 필요합니다. [.NET Framework 다운로드](https://msdn.microsoft.com/aa496123) Windows 7 이상의 운영체제에서 사용하는 것을 권장합니다.
-
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
