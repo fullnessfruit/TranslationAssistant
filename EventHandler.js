@@ -316,6 +316,17 @@ function OnWebViewTranslationDidNavigateInPage() {
 function OnWebViewTranslationDidFrameFinishLoad() {
 	const webViewTranslation = document.getElementById("webViewTranslation");
 
+	// 네이버 일본어 사전 검색인 경우에는 번역 결과가 보이도록 무조건 페이지 맨 아래로 스크롤하고, 엔터만 누르면 다음 문장이 검색될 수 있도록 buttonNext에 포커스를 설정한다.
+	if (webViewTranslation.getURL().startsWith("https://ja.dict.naver.com/#/search?query="))
+	{
+		// 뭔가가 실행되어 스크롤이 다시 올라가는 듯 하니 적당히 0.8초 기다린다.
+		setTimeout(() => {
+			// 검색 이력 때문에 스크롤이 길어지니 검색 이력 삭제처럼 보이는 버튼은 전부 누른 후에 스크롤을 내린다.
+			webViewTranslation.executeJavaScript("var elements = document.getElementsByClassName('btn_all_del'); for (var i = 0; i < elements.length; i++) { elements[i].click(); } window.scrollTo(0, document.body.scrollHeight);");
+		}, 800);
+		document.getElementById("buttonNext").focus();
+	}
+
 	document.getElementById("buttonBack").disabled = !webViewTranslation.canGoBack();
 	document.getElementById("buttonForward").disabled = !webViewTranslation.canGoForward();
 }
